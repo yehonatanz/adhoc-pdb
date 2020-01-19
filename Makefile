@@ -7,6 +7,8 @@ format: black isort
 
 pre-commit: lint test
 
+ci: lint test
+
 test:
 	poetry run pytest
 
