@@ -1,11 +1,13 @@
 install:
-	poetry install --dev
+	poetry install
 
 lint: flake8 mypy
 
 format: black isort
 
 pre-commit: lint test
+
+ci: lint test
 
 test:
 	poetry run pytest

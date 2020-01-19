@@ -5,7 +5,7 @@ description = ""
 authors = ["Yehonatan Zecharia <yonti95@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.5 || ~2.7"
 remote-pdb = "^2.0"
 
 [tool.poetry.dev-dependencies]
