@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "adhoc-pdb"
+version = "0.1.0"
+description = ""
+authors = ["Yehonatan Zecharia <yonti95@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+remote-pdb = "^2.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+isort = "^4.3"
+mypy = "^0.761.0"
+flake8 = "^3.7"
+flake8-isort = "^2.8"
+flake8-black = "^0.1.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
