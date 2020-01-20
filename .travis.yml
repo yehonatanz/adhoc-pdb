@@ -19,3 +19,13 @@ install:
 script:
 - pytest tests
 
+deploy:
+  provider: pypi
+  user: "__token__"
+  password:
+    secure: FEF66qcFS1oKj8DKPNjXTXW7CbE4VyKF+79cFkrAuHXeR5V/p+ABKzAmEZIH9V38rHlklLlr1WGzg3s1rOxqyIMbPfYwFcQCet9OOOSlW3OiU0AJ8QEsT/2/GRH8CmYrv3OA6JcTu8FZPlrsxsHqKAAR9X4wztsLA2fgO8ptpQ7u5nehh2yxihk3ly+7zPAfsXuR70WmEfQ9XFw8EkYgCC8+xGpsW0F1iw7voZrYKP+loXw6ayHXLGUqQi2/0Wxt2h9vRuBY3nX5s3JNlhyUe+SX88y/ScWSh5Q+x2JoyZYPo26beb43AplL0iWZd28ydypyOgRH9/d/kVaoNaXNiH0EhCFZE4g9KUVK0BFctxiR940EqG/ThBD+KQtmUGEgnJjx/pD4TTE/61vjjb5BeOZnOEPe8F9/ArxuIPVITOUPfYaRszXW0nDt9I7Wh7/KJmI7FqaneJUkULtme5WnJ1OEAFxCfpr0kuIy/9sG3k6bHMwE+znLFTGyUg4/lou0CgI8sljnSdGYsvBc0UFgn6jFX4bI1gGfk6peKUbUeYCGsaBzfDPDnBfR9+OEsma9xI7rl79KxCmkLwcK6nHMtS0wxvhu7TMtr35giyiT/w6nqwX8/+F/t6xpwQtlmwLu2vduk1M5jzylHrW6bOsER5eNWHTgDSaUM04td10TLJk=
+  skip_cleanup: true
+  skip_existing: true
+  on:
+    branch: master
+    python: 3.7
