@@ -1,21 +1,21 @@
 language: python
 python:
-  - 2.7
-  - 3.5
-  - 3.6
-  - 3.7
-  - 3.8
+- 2.7
+- 3.5
+- 3.6
+- 3.7
+- 3.8
 jobs:
   include:
-    - python: 3.8
-      install: make install
-      script: make ci
+  - python: 3.8
+    install: make install
+    script: make ci
 before_install:
-  - pip install poetry
+- pip install poetry
 install:
-  - poetry build
-  - pip install dist/*.tar.gz
-  - pip install pytest
+- poetry build
+- pip install dist/*.tar.gz
+- pip install pytest
 script:
-  - pytest tests
+- pytest tests
 
