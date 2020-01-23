@@ -17,3 +17,8 @@ def test_pdb_is_opened(script_path, script, telnet):
     banner = telnet.read_until(b"\n(Pdb)", timeout=1)
     assert b"->" in banner
     assert script_path.encode("utf-8") in banner
+
+    telnet.write(b"b 10\n")
+    breakpoint_response = telnet.read_until(b"\n(Pdb)", timeout=1)
+    assert b"Breakpoint 1 at" in breakpoint_response
+    assert breakpoint_response.strip().endswith(b":10\r\n(Pdb)")
