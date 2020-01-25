@@ -1,8 +1,9 @@
 from typing import Union
 
+import click
 import pytest
 
-from adhoc_pdb.cli import UnknownSignal, resolve_signum
+from adhoc_pdb.cli import UnknownSignal, cli, resolve_signum
 
 
 @pytest.mark.parametrize(
@@ -28,3 +29,16 @@ def test_resolve_signum_on_invalid_signals(signum):
     # type: (Union[str, int]) -> None
     with pytest.raises(UnknownSignal):
         resolve_signum(signum)
+
+
+def test_cli_fails_on_wrong_signum():
+    with pytest.raises(click.UsageError) as e:
+        click.Context(cli).invoke(cli, signum="bla")
+    assert "bla" in str(e).lower()
+
+
+def test_cli_fails_on_wrong_pid():
+    pid = 123456789
+    with pytest.raises(click.UsageError) as e:
+        click.Context(cli).invoke(cli, pid=pid)
+    assert str(pid) in str(e)
