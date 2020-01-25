@@ -427,7 +427,7 @@ python-versions = "*"
 version = "1.4.1"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Type Hints for Python"
 marker = "python_version < \"3.5\""
 name = "typing"
@@ -465,7 +465,7 @@ more-itertools = "*"
 cli = ["click"]
 
 [metadata]
-content-hash = "94b9b0a8f5be64fb41edca1a2fa128ed680af15f05cff039e0f5266799b07e68"
+content-hash = "271c637a46fde77117e45eef3d5a1e740fcf67f836d5e1af07cd242e2d14f425"
 python-versions = "^3.5 || ~2.7"
 
 [metadata.hashes]
