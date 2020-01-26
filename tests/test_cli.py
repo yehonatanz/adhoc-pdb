@@ -35,14 +35,14 @@ def test_resolve_signum_on_invalid_signals(signum):
 def test_cli_fails_on_wrong_signum():
     with pytest.raises(click.UsageError) as e:
         click.Context(cli).invoke(cli, signum="bla")
-    assert "bla" in str(e).lower()
+    assert "bla" in str(e.value).lower()
 
 
 def test_cli_fails_on_wrong_pid():
     pid = 123456789
     with pytest.raises(click.UsageError) as e:
         click.Context(cli).invoke(cli, pid=pid)
-    assert str(pid) in str(e)
+    assert str(pid) in str(e.value)
 
 
 T = TypeVar("T", str, bytes)
