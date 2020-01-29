@@ -28,8 +28,10 @@ def script_path(root_path):
 
 
 @contextlib.contextmanager
-def process_fixture(args, startup_time=0.1, time_before_sigkill=0.1):
-    # type: (List[str], float, float) -> Iterator[subprocess.Popen]
+def process_fixture(
+    args, startup_time=0.1, time_before_sigkill=0.1, allow_failure=False
+):
+    # type: (List[str], float, float, bool) -> Iterator[subprocess.Popen]
     proc = subprocess.Popen(
         args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE,
     )
@@ -37,6 +39,10 @@ def process_fixture(args, startup_time=0.1, time_before_sigkill=0.1):
     try:
         yield proc
     finally:
+        if not allow_failure:
+            assert proc.poll() in {None, 0}, "Error when running {!r}:\n{}".format(
+                args, proc.stderr.read().decode("utf-8")
+            )
         proc.terminate()
         if proc.poll() is None:
             time.sleep(time_before_sigkill)
@@ -46,7 +52,7 @@ def process_fixture(args, startup_time=0.1, time_before_sigkill=0.1):
 
 @pytest.yield_fixture
 def script(script_path):
-    with process_fixture([sys.executable, script_path]) as proc:
+    with process_fixture([sys.executable, script_path], allow_failure=True) as proc:
         yield proc
 
 
