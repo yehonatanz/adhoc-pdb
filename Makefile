@@ -1,5 +1,5 @@
 install:
-	poetry install
+	poetry install -E cli
 
 lint: flake8 mypy
 

@@ -4,3 +4,25 @@
 [![PyPI version](https://badge.fury.io/py/adhoc-pdb.svg)](https://pypi.org/project/adhoc-pdb/)
 
 A simple tool that allows you to debug your system whenever you want, with no overhead, even in production!
+
+### Install
+`pip install adhoc-pdb` (or `pip install adhoc-pdb[cli]` to get a nice CLI)
+
+For development, clone this repo and run `make`.
+
+### Usage
+In your code:
+```python
+import adhoc_pdb
+adhoc_pdb.install()
+```
+
+Debug using adhoc-pdb cli:
+```bash
+adhoc-pdb <pid>
+```
+or using pure shell:
+```bash
+kill -SIGUSR1 <pid>
+telnet localhost 9999
+```

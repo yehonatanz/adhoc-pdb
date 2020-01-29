@@ -1,50 +1,7 @@
-import os
 import subprocess
-import sys
 import telnetlib
-import time
-
-import pytest
 
 import adhoc_pdb
-
-
-@pytest.fixture(scope="session")
-def script_path():
-    # type: () -> str
-    path = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "script_to_debug.py",
-    )
-    assert os.path.exists(path)
-    return path
-
-
-@pytest.yield_fixture
-def script(script_path):
-    proc = subprocess.Popen(
-        [sys.executable, script_path],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        stdin=subprocess.PIPE,
-    )
-    try:
-        time.sleep(0.1)
-        yield proc
-    finally:
-        proc.terminate()
-        time.sleep(0.002)
-        if proc.poll() is None:
-            proc.kill()
-
-
-@pytest.yield_fixture
-def telnet():
-    t = telnetlib.Telnet()
-    try:
-        yield t
-    finally:
-        t.close()
 
 
 def test_pdb_is_opened(script_path, script, telnet):
@@ -60,3 +17,8 @@ def test_pdb_is_opened(script_path, script, telnet):
     banner = telnet.read_until(b"\n(Pdb)", timeout=1)
     assert b"->" in banner
     assert script_path.encode("utf-8") in banner
+
+    telnet.write(b"b 10\n")
+    breakpoint_response = telnet.read_until(b"\n(Pdb)", timeout=1)
+    assert b"Breakpoint 1 at" in breakpoint_response
+    assert breakpoint_response.strip().endswith(b":10\r\n(Pdb)")

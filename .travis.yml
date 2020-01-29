@@ -14,10 +14,12 @@ before_install:
 - pip install poetry
 install:
 - poetry build
-- pip install dist/*.tar.gz
+- mv dist/*.tar.gz artifact.tar.gz
+- pip install artifact.tar.gz[cli]
 - pip install pytest
 script:
 - pytest tests
+- which adhoc-pdb
 
 deploy:
   provider: pypi
