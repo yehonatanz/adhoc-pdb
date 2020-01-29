@@ -1,7 +1,9 @@
 import errno
 import os
 import signal
+import sys
 import telnetlib
+import time
 from typing import Union
 
 import click
@@ -12,8 +14,13 @@ from .adhoc_pdb import DEFAULT_PORT, DEFAULT_SIGNAL
 def debug(pid, signum=DEFAULT_SIGNAL, port=DEFAULT_PORT):
     # type: (int, int ,int) -> None
     os.kill(pid, signum)
-    with telnetlib.Telnet("localhost", port) as telnet:
+    if sys.version_info < (3, 6):
+        time.sleep(0.1)
+    telnet = telnetlib.Telnet("localhost", port)
+    try:
         telnet.interact()
+    finally:
+        telnet.close()
 
 
 class UnknownSignal(ValueError):
