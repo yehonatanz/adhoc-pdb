@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "adhoc-pdb"
-version = "0.1.1"
+version = "0.1.2"
 description = "A simple tool that allows you to debug your system whenever you want, with no overhead, even in production!"
 authors = ["Yehonatan Zecharia <yonti95@gmail.com>"]
 readme = "README.md"
