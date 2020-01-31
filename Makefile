@@ -1,3 +1,4 @@
+SRC_DIR=adhoc_pdb
 install:
 	poetry install -E cli
 
@@ -10,7 +11,7 @@ pre-commit: lint test
 ci: lint test
 
 test:
-	poetry run pytest
+	poetry run pytest --cov=$(SRC_DIR)
 
 black:
 	poetry run black .
