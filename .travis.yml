@@ -9,7 +9,9 @@ jobs:
   include:
   - python: 3.8
     install: make install
-    script: make ci
+    script:
+    - make ci
+    - bash <(curl -s https://codecov.io/bash)
 before_install:
 - pip install poetry
 install:
