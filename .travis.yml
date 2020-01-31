@@ -12,6 +12,11 @@ jobs:
     script:
     - make ci
     - bash <(curl -s https://codecov.io/bash)
+  - python: 2.7
+    install: make install
+    script:
+    - make test
+    - bash <(curl -s https://codecov.io/bash)
 before_install:
 - pip install poetry
 install:
