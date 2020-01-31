@@ -1,5 +1,6 @@
 import contextlib
 import os
+import signal
 import subprocess
 import sys
 import telnetlib
@@ -29,7 +30,7 @@ def script_path(root_path):
 
 @contextlib.contextmanager
 def process_fixture(
-    args, startup_time=0.1, time_before_sigkill=0.1, allow_failure=False
+    args, startup_time=0.1, time_before_signal_escalation=0.1, allow_failure=False
 ):
     # type: (List[str], float, float, bool) -> Iterator[subprocess.Popen]
     proc = subprocess.Popen(
@@ -43,11 +44,16 @@ def process_fixture(
             assert proc.poll() in {None, 0}, "Error when running {!r}:\n{}".format(
                 args, proc.stderr.read().decode("utf-8")
             )
-        proc.terminate()
+        _send_signals(proc, [signal.SIGINT, signal.SIGTERM, signal.SIGKILL])
+
+
+def _send_signals(proc, signals, time_before_signal_escalation=0.1):
+    # type: (subprocess.Popen, List[int], float) -> None
+    for signum in signals:
         if proc.poll() is None:
-            time.sleep(time_before_sigkill)
+            proc.send_signal(signum)
         if proc.poll() is None:
-            proc.kill()
+            time.sleep(time_before_signal_escalation)
 
 
 @pytest.yield_fixture
