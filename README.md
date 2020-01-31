@@ -1,5 +1,6 @@
 # adhoc-pdb
 [![Build Status](https://travis-ci.org/yehonatanz/adhoc-pdb.svg?branch=master)](https://travis-ci.org/yehonatanz/adhoc-pdb)
+[![codecov](https://codecov.io/gh/yehonatanz/adhoc-pdb/branch/master/graph/badge.svg)](https://codecov.io/gh/yehonatanz/adhoc-pdb)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![PyPI version](https://badge.fury.io/py/adhoc-pdb.svg)](https://pypi.org/project/adhoc-pdb/)
 
