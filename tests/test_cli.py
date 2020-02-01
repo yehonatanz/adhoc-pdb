@@ -4,19 +4,19 @@ from typing.io import IO
 import click
 import pytest
 
-from adhoc_pdb.cli import cli
+from adhoc_pdb.cli import cli_debug
 
 
 def test_cli_fails_on_wrong_signum():
     with pytest.raises(click.UsageError) as e:
-        click.Context(cli).invoke(cli, signum="bla")
+        click.Context(cli_debug).invoke(cli_debug, signum="bla")
     assert "bla" in str(e.value).lower()
 
 
 def test_cli_fails_on_wrong_pid():
     pid = 123456789
     with pytest.raises(click.UsageError) as e:
-        click.Context(cli).invoke(cli, pid=pid)
+        click.Context(cli_debug).invoke(cli_debug, pid=pid)
     assert str(pid) in str(e.value)
 
 

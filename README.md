@@ -24,7 +24,7 @@ adhoc_pdb.install()
 
 Debug using adhoc-pdb cli:
 ```bash
-adhoc-pdb <pid>
+adhoc-pdb debug <pid>
 ```
 or using pure shell:
 ```bash

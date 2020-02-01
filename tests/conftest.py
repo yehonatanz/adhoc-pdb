@@ -64,7 +64,9 @@ def script(script_path):
 
 @pytest.yield_fixture
 def cli_client(script):
-    with process_fixture([sys.executable, "-m", cli.__name__, str(script.pid)]) as proc:
+    with process_fixture(
+        [sys.executable, "-m", cli.__name__, "debug", str(script.pid)]
+    ) as proc:
         yield proc
 
 

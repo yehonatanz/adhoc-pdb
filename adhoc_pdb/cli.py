@@ -23,7 +23,12 @@ def debug(pid, signum=DEFAULT_SIGNAL, port=DEFAULT_PORT):
         telnet.close()
 
 
-@click.command(help="Debug a python process that installed adhoc_pdb")
+@click.group()
+def cli():
+    pass
+
+
+@cli.command("debug", help="Debug a python process that installed adhoc_pdb")
 @click.argument("pid", type=int)
 @click.option(
     "-s",
@@ -41,8 +46,10 @@ def debug(pid, signum=DEFAULT_SIGNAL, port=DEFAULT_PORT):
     show_default=True,
 )
 @click.pass_context
-def cli(ctx, pid, signum, port):
+def cli_debug(ctx, pid, signum, port):
     # type: (click.Context, int, Union[str, int], int) -> None
+    if ctx.invoked_subcommand:
+        return
     try:
         signum = int(resolve_signum(signum))
     except UnknownSignal as e:
