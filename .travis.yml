@@ -17,6 +17,14 @@ jobs:
     script:
     - make test
     - bash <(curl -s https://codecov.io/bash)
+  - os: osx
+    language: shell
+    before_install:
+    - ln -sf $(which python3) $(which python)
+    - python --version
+    - ln -sf $(which pip3) $(which pip)
+    - pip --version
+    - pip install poetry
 before_install:
 - pip install poetry
 install:
