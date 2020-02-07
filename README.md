@@ -6,6 +6,10 @@
 
 A simple tool that allows you to debug your system whenever you want, with no overhead, even in production!
 
+Tested on linux and OSX, should on any POSIX compliant system.
+
+Supports `python>=2.7,>=3.5`.
+
 ### Install
 `pip install adhoc-pdb` (or `pip install adhoc-pdb[cli]` to get a nice CLI)
 
