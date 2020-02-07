@@ -1,3 +1,4 @@
+import signal
 from typing import Union
 
 import pytest
@@ -8,12 +9,12 @@ from adhoc_pdb.utils import UnknownSignal, resolve_signum
 @pytest.mark.parametrize(
     ("signum", "expected"),
     [
-        ("usr1", 10),
-        ("USR1", 10),
-        ("uSr1", 10),
-        ("sigusr1", 10),
-        ("SiGusr1", 10),
-        ("SIGUSR1", 10),
+        ("usr1", signal.SIGUSR1),
+        ("USR1", signal.SIGUSR1),
+        ("uSr1", signal.SIGUSR1),
+        ("sigusr1", signal.SIGUSR1),
+        ("SiGusr1", signal.SIGUSR1),
+        ("SIGUSR1", signal.SIGUSR1),
         ("10", 10),
         (10, 10),
     ],
