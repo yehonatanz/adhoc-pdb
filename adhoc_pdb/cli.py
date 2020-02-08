@@ -48,8 +48,6 @@ def cli():
 @click.pass_context
 def cli_debug(ctx, pid, signum, port):
     # type: (click.Context, int, Union[str, int], int) -> None
-    if ctx.invoked_subcommand:
-        return
     try:
         signum = int(resolve_signum(signum))
     except UnknownSignal as e:
