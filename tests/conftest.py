@@ -9,8 +9,6 @@ from typing import Iterator, List
 
 import pytest
 
-from adhoc_pdb import cli
-
 
 @pytest.fixture(scope="session")
 def root_path():
@@ -64,9 +62,7 @@ def script(script_path):
 
 @pytest.yield_fixture
 def cli_client(script):
-    with process_fixture(
-        [sys.executable, "-m", cli.__name__, "debug", str(script.pid)]
-    ) as proc:
+    with process_fixture(["adhoc-pdb", "debug", str(script.pid)]) as proc:
         yield proc
 
 
